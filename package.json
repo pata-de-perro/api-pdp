@@ -1,0 +1,22 @@
+{
+  "name": "api-pdp",
+  "version": "1.0.0",
+  "description": "Platform backend to centralize locations and dates of trips and group meetings",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch . index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pata-de-perro/api-pdp.git"
+  },
+  "author": "pdp",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
