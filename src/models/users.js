@@ -20,7 +20,7 @@ const userSchema = new Schema(
           const hashedPass = await bcrypt.hash(password, salt);
           return hashedPass;
         } catch (err) {
-          throw new Error(`Error: ${err.msg}`);
+          throw new Error(`Error: ${err.message}`);
         }
       },
       comparePassword: async (password, hash) => {
@@ -28,7 +28,7 @@ const userSchema = new Schema(
           const match = await bcrypt.compare(password, hash);
           return match;
         } catch (err) {
-          throw new Error(`Error: ${err.msg}`);
+          throw new Error(`Error: ${err.message}`);
         }
       },
     },
