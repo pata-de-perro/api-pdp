@@ -11,4 +11,8 @@ module.exports = {
     HOST: process.env.DB_HOST,
     NAME: process.env.DB_NAME,
   },
+  JWT: {
+    SECRET: process.env.JWT_SECRET,
+    EXPIRES: process.env.JWT_EXPIRES_IN,
+  },
 };
