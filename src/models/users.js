@@ -10,6 +10,8 @@ const userSchema = new Schema(
     phoneNumber: { type: Number },
     avatar: { type: String },
     eventID: { type: mongoose.Schema.ObjectId, ref: "Event" },
+    birthdate: { type: Date },
+    gender: { type: String },
   },
   {
     timestamps: true,
