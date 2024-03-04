@@ -19,7 +19,7 @@ fs.readdirSync(pathRouter).filter((file) => {
 router.get("*", (req, res) => {
   res
     .status(404)
-    .send({ ok: false, msg: "Page not found", error: "Not found" });
+    .send({ success: false, msg: "Page not found", error: "Not found" });
 });
 
 module.exports = router;

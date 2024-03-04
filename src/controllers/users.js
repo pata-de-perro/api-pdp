@@ -7,16 +7,14 @@ const createNewUser = async (req, res) => {
     if (!newUser) {
       return res
         .status(502)
-        .send({ ok: false, msg: "User not created", err: newUser });
+        .send({ success: false, msg: "User not created", err: newUser });
     }
     await newUser.save();
-    return res
-      .status(201)
-      .send({ ok: true, msg: "User created!", data: newUser });
+    return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {
     return res
       .status(err.status || 500)
-      .send({ ok: false, msg: err.message || "Unknown" });
+      .send({ success: false, msg: err.message || "Unknown" });
   }
 };
 

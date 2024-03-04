@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.status(200).send({ ok: true, msg: "Welcome API PDP" });
+  res.status(200).send({ success: true, msg: "Welcome API PDP" });
 });
 app.use(apiRoutes);
 

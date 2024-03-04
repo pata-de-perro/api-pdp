@@ -8,22 +8,26 @@ const authUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).send({ ok: false, msg: "Incorrect credentials!" });
+      return res
+        .status(401)
+        .send({ success: false, msg: "Incorrect credentials!" });
     }
 
     let validPass = await User.comparePassword(password, user.password);
     if (!validPass) {
-      return res.status(401).send({ msg: "Incorrect credentials!" });
+      return res
+        .status(401)
+        .send({ success: false, msg: "Incorrect credentials!" });
     }
 
     let token = generateToken({ id: user._id });
     return res
       .status(200)
-      .send({ ok: true, msg: "Successful login", data: token });
+      .send({ success: true, msg: "Successful login", data: token });
   } catch (err) {
     return res
       .status(err.status || 401)
-      .send({ ok: false, msg: err.message || "Unknown" });
+      .send({ success: false, msg: err.message || "Unknown" });
   }
 };
 
