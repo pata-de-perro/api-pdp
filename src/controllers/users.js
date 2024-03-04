@@ -18,6 +18,42 @@ const createNewUser = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ success: false, msg: "User not found" });
+    }
+    return res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .send({ success: false, msg: err.message || "Unknown" });
+  }
+};
+
+const updateUserProfile = async (req, res) => {
+  const userId = req.params.id;
+  const updatedUser = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(userId, updatedUser, {
+      new: true,
+    });
+    if (!user) {
+      return res.status(404).json({ success: false, msg: "User not found" });
+    }
+    return res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .send({ success: false, msg: err.message || "Unknown" });
+  }
+};
+
 module.exports = {
   createNewUser,
+  getUserProfile,
+  updateUserProfile,
 };
