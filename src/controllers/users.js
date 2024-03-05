@@ -24,9 +24,9 @@ const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(userId).select("-password");
     if (!user) {
-      return res.status(404).json({ success: false, msg: "User not found" });
+      return res.status(404).send({ success: false, msg: "User not found" });
     }
-    return res.status(200).json({ success: true, data: user });
+    return res.status(200).send({ success: true, data: user });
   } catch (err) {
     return res
       .status(err.status || 500)
