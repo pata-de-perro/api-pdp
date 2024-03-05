@@ -18,6 +18,23 @@ const createNewEvent = async (req, res) => {
   }
 };
 
+const getEventsByUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const events = await Event.find({ userID: id });
+    if (!events) {
+      return res.status(404).send({ success: false, msg: "Events not found" });
+    }
+    return res.status(200).send({ success: true, data: events });
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .send({ success: false, msg: err.message || "Unknown" });
+  }
+};
+
 module.exports = {
   createNewEvent,
+  getEventsByUser,
 };
