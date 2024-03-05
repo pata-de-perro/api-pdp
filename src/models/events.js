@@ -3,17 +3,21 @@ const { Schema, model } = mongoose;
 
 const eventSchema = new Schema(
   {
+    title: { type: String, trim: true, required: true },
+    description: { type: String, trim: true, required: true },
     initialDate: { type: Date, default: Date.now },
     endDate: { type: Date, default: Date.now },
-    coord: { type: [Number], required: true },
-    locationID: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Location",
-      required: true,
-    },
+    coordsEvent: { type: [Number], required: true },
+    locations: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Location",
+      },
+    ],
     userID: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
     isTravel: { type: Boolean, default: false },
-    debt: { type: String },
+    isIvitation: { type: Boolean, default: false },
+    urlImage: { type: String },
   },
   { timestamps: true }
 );
