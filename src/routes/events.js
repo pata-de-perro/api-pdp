@@ -6,9 +6,10 @@ const {
   getEventsByUser,
   updateEventsById,
 } = require("../controllers/events");
+const { auth } = require("../middlewares/auth");
 
-router.post("/", createNewEvent);
-router.get("/:id", getEventsByUser);
-router.put("/update/:id", updateEventsById);
+router.post("/", [auth], createNewEvent);
+router.get("/:id", [auth], getEventsByUser);
+router.put("/update/:id", [auth], updateEventsById);
 
 module.exports = router;
