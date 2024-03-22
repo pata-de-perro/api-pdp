@@ -15,4 +15,10 @@ module.exports = {
     SECRET: process.env.JWT_SECRET,
     EXPIRES: process.env.JWT_EXPIRES_IN,
   },
+  corsOptions: {
+    origin: process.env.URL_ORIGIN,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200,
+  },
 };
