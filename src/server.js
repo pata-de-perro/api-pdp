@@ -1,15 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan");
 
 const apiRoutes = require("./routes");
+const { corsOptions } = require("../config/constants");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "*" }));
-app.use(morgan("dev"));
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.status(200).send({ success: true, msg: "Welcome API PDP" });
