@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
   res.status(200).send({ success: true, msg: "Welcome API PDP" });
