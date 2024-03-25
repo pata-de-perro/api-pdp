@@ -18,6 +18,7 @@ const eventSchema = new Schema(
     isTravel: { type: Boolean, default: false },
     isIvitation: { type: Boolean, default: false },
     urlImage: { type: String },
+    friends: {type:String, trim: true, required:false, ref:"Friends"}
   },
   { timestamps: true }
 );
