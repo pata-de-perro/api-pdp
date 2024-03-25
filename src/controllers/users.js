@@ -20,8 +20,7 @@ const createNewUser = async (req, res) => {
       .send({ success: false, msg: "User not created", err: newUser });
     }
     await newUser.save()
-    // console.log(newUser.email)
-    await welcome(newUser.mail);
+    await welcome(newUser.email);
     return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {
     return res
