@@ -18,6 +18,7 @@ const eventSchema = new Schema(
     userId: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
     isTravel: { type: Boolean, default: false },
     urlImage: { type: String },
+    friends: {type:String, trim: true, required:false, ref:"Friends"}
   },
   { timestamps: true }
 );
