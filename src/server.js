@@ -4,8 +4,6 @@ const cors = require("cors");
 const apiRoutes = require("./routes");
 const { corsOptions } = require("../config/constants");
 
-// const { sendMail } = require("./controllers/mail");
-
 const app = express();
 
 app.use(express.json());
@@ -16,7 +14,5 @@ app.get("/", (req, res) => {
   res.status(200).send({ success: true, msg: "Welcome API PDP" });
 });
 app.use(apiRoutes);
-
-// app.use(sendMail)
 
 module.exports = app;
