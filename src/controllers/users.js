@@ -1,6 +1,6 @@
 const User = require("../models/users");
-const { sendWelcome } = require("../middlewares/welcomeMail")
-const {mail} = require("./mail")
+// const { sendWelcome } = require("../middlewares/welcomeMail")
+// const {mail} = require("./mail")
 
 const createNewUser = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ const createNewUser = async (req, res) => {
         .status(502)
         .send({ success: false, msg: "User not created", err: newUser });
     }
-    await mail(sendWelcome(newUser.mail))
+    // await mail(sendWelcome(newUser.mail))
     await newUser.save();
     return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {

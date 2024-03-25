@@ -4,7 +4,7 @@ const cors = require("cors");
 const apiRoutes = require("./routes");
 const { corsOptions } = require("../config/constants");
 
-const { sendMail } = require("./controllers/mail");
+// const { sendMail } = require("./controllers/mail");
 
 const app = express();
 
@@ -17,6 +17,6 @@ app.get("/", (req, res) => {
 });
 app.use(apiRoutes);
 
-app.use(sendMail)
+// app.use(sendMail)
 
 module.exports = app;
