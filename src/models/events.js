@@ -4,9 +4,10 @@ const { Schema, model } = mongoose;
 const eventSchema = new Schema(
   {
     title: { type: String, trim: true, required: true },
-    description: { type: String, trim: true, required: true },
+    description: { type: String, trim: true },
     initialDate: { type: Date, default: Date.now },
     endDate: { type: Date, default: Date.now },
+    locationEvent: { type: String, trim: true },
     coordsEvent: { type: [Number], required: true },
     locations: [
       {
@@ -14,9 +15,8 @@ const eventSchema = new Schema(
         ref: "Location",
       },
     ],
-    userID: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
+    userId: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
     isTravel: { type: Boolean, default: false },
-    isIvitation: { type: Boolean, default: false },
     urlImage: { type: String },
   },
   { timestamps: true }

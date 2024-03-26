@@ -21,4 +21,7 @@ module.exports = {
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
   },
+  SENDGRID: {
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+  }
 };

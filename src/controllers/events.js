@@ -10,7 +10,7 @@ const createNewEvent = async (req, res) => {
         .send({ success: false, msg: "Event not created", err: newEvent });
     }
     await newEvent.save();
-    return res.status(201).send({ success: true, msg: "Event created!" });
+    return res.status(201).send({ success: true, event: newEvent._id });
   } catch (err) {
     return res
       .status(err.status || 500)
@@ -22,7 +22,7 @@ const getEventsByUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const events = await Event.find({ userID: id });
+    const events = await Event.find({ userId: id });
     if (!events) {
       return res.status(404).send({ success: false, msg: "Events not found" });
     }
@@ -50,9 +50,26 @@ const updateEventsById = async (req, res) => {
       .send({ success: false, msg: err.message || "Unknown" });
   }
 };
+const addFriends = async (req, res) => {
+  const { id } = req.params;
+  const addFriend = req.body;
+
+  try {
+    const event = await Event.findByIdAndUpdate(id, addFriend, { new: true });
+    if (!event) {
+      return res.status(404).send({ success: false, msg: "Event not found" });
+    }
+    return res.status(200).send({ success: true, data: event });
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .send({ success: false, msg: err.message || "Unknown" });
+  }
+};
 
 module.exports = {
   createNewEvent,
   getEventsByUser,
   updateEventsById,
+  addFriends,
 };
