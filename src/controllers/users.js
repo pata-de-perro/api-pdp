@@ -1,6 +1,5 @@
 const User = require("../models/users");
-const {mail} = require("../controllers/mail")
-const {welcome} = require("../lib/welcomeMail")
+const { welcome } = require("../lib/welcomeMail");
 
 const createNewUser = async (req, res) => {
   try {
@@ -10,16 +9,16 @@ const createNewUser = async (req, res) => {
         .status(400)
         .send({ success: false, msg: "Email already in use" });
     }
-    
+
     const newUser = await User.create(req.body);
     newUser.password = await User.encrypPassword(newUser.password);
-    
+
     if (!newUser) {
       return res
-      .status(502)
-      .send({ success: false, msg: "User not created", err: newUser });
+        .status(502)
+        .send({ success: false, msg: "User not created", err: newUser });
     }
-    await newUser.save()
+    await newUser.save();
     await welcome(newUser.email);
     return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {
