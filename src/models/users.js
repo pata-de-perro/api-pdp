@@ -9,7 +9,7 @@ const userSchema = new Schema(
     password: { type: String, trim: true, required: true },
     phoneNumber: { type: Number },
     avatar: { type: String },
-    eventID: { type: mongoose.Schema.ObjectId, ref: "Event" },
+    eventId: { type: mongoose.Schema.ObjectId, ref: "Event" },
     birthdate: { type: Date },
     gender: { type: String },
   },

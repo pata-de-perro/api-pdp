@@ -5,7 +5,7 @@ const expenseSchema = new Schema(
   {
     quantity: { type: Number },
     userList: [{ type: mongoose.Schema.ObjectId, ref: "User", required: true }],
-    eventID: {
+    eventId: {
       type: mongoose.Schema.ObjectId,
       ref: "Event",
       required: true,
