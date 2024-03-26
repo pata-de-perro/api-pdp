@@ -22,7 +22,7 @@ const getEventsByUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const events = await Event.find({ userID: id });
+    const events = await Event.find({ userId: id });
     if (!events) {
       return res.status(404).send({ success: false, msg: "Events not found" });
     }
