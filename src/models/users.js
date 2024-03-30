@@ -12,7 +12,7 @@ const userSchema = new Schema(
     eventId: { type: mongoose.Schema.ObjectId, ref: "Event" },
     birthdate: { type: Date },
     gender: { type: String },
-    isActive: {type:Boolean, default: false, required: true}
+    isActive: {type:Boolean, default: false, required: true},
   },
   {
     timestamps: true,
