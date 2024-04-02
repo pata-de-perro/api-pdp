@@ -10,8 +10,6 @@ const createNewUser = async (req, res) => {
         .status(400)
         .send({ success: false, msg: "Email already in use" });
     }
-    
-
     const newUser = await User.create(req.body);
     newUser.password = await User.encrypPassword(newUser.password);
     newUser.emailToken = crypto.randomBytes(64).toString('hex')

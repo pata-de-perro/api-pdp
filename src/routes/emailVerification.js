@@ -7,7 +7,7 @@ const {
   } = require("../controllers/users");
 
 
-router.get("/verify-email", [ validateEmail ], getUserProfile );
+router.get("/verify-email", [ validateEmail ]);
 
 module.exports = router;
 
