@@ -2,6 +2,7 @@
 const User = require("../models/users");
 const { verifyToken } = require("../lib/jwt");
 
+
 const auth = async (req, res, next) => {
   const { authorization } = req.headers;
 
@@ -12,6 +13,8 @@ const auth = async (req, res, next) => {
 
     const token = authorization.replace("Bearer ", "");
     const payload = verifyToken(token);
+  
+
     req.user = await User.findById(payload.id).select("-password");
 
     next();
