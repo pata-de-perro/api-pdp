@@ -64,23 +64,6 @@ const updateEventsById = async (req, res) => {
     return res
       .status(err.status || 500)
       .send({ success: false, msg: err.message || "Unknown" });
-  };
-
-};
-const addFriends = async (req, res) => {
-  const { id } = req.params;
-  const addFriend = req.body;
-
-  try {
-    const event = await Event.findByIdAndUpdate(id, addFriend, { new: true})
-    if (!event) {
-      return res.status(404).send({ success: false, msg: "Event not found"});
-    }
-    return res.status(200).send({ success: true, data: event});
-  } catch (err) {
-    return res
-    .status(err.status || 500)
-    .send({ success: false, msg: err.message || "Unknown"});
   }
 };
 const addFriends = async (req, res) => {
