@@ -13,6 +13,7 @@ const userSchema = new Schema(
     birthdate: { type: Date },
     gender: { type: String },
     isActive: {type:Boolean, default: false, required: true},
+    emailToken: {type:String},
   },
   {
     timestamps: true,
