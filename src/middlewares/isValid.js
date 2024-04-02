@@ -9,13 +9,10 @@ const validateEmail = async (req, res, next) => {
           res.status(404).json({ success: false, msg: "Token no valid" })
           return res.redirect('/')
       }
-      // console.log(user.emailToken)
       user.emailToken = null;
       user.isActive = true;
       await user.save();
-
-      console.log("validating completed")
-      return res.redirect('/')
+      return res.redirect(`http://localhost:3000/account/login`)
   }   catch(error){
       console.log(error)
   }
