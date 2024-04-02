@@ -13,6 +13,8 @@ const validateEmail = async (req, res, next) => {
       user.emailToken = null;
       user.isActive = true;
       await user.save();
+
+      console.log("validating completed")
       return res.redirect('/')
   }   catch(error){
       console.log(error)
