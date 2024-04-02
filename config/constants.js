@@ -24,7 +24,6 @@ module.exports = {
   SENDGRID: {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
-  CAPTCHA: {
-    NEXT_PUBLIC_SECRET_KEY: process.env.NEXT_PUBLIC_SECRET_KEY,
-  }
+  CAPTCHA: process.env.RECAPTCHA_SECRET_KEY,
+
 };

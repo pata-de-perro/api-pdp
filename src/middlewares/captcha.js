@@ -1,23 +1,25 @@
-const captcha = async(req,res,next) => {
-    const {captchaToken} = req.headers;
+const { CAPTCHA } = require("../../config/constants");
+const axios = require("axios")
 
+const captcha = async(req,res,next) => {
+    
+    const {tokenCaptcha} = req.body
+
+    if(!tokenCaptcha){
+        return res.status(422).send( {success: false, msg: "reCaptcha token is missing" })
+    }
     try{
-        const _NEXT_PUBLIC_SECRET_KEY='6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
-    
-        const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${_NEXT_PUBLIC_SECRET_KEY}&response=${captchaToken}`
-        const response = await fetch(googleVerifyUrl)
-    
-        const { success } = await response.json()
-    
-        if(!success){
-          return res.status(401).send({ success: false, msg: "recaptcha false" });
+        const googleVirfyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${CAPTCHA}&response=${tokenCaptcha}`
+        const response = await axios.post(googleVirfyUrl)
+        const { success } = response.data
+        
+        if(success){
+            delete req.body.tokenCaptcha
+            next()
         }
-        console.log("middleware captcha")
-        next();
     } catch (err){
-        return res
-        .status(401)
-        .send({success: false, msg: err.message || "Unknown"});
+        console.log(err)
+        return res.status(400).json({error: "reCaptcha error"})
     }
 };
 
