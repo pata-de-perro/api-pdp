@@ -1,5 +1,6 @@
 const User = require("../models/users");
 const { welcome } = require("../lib/welcomeMail");
+const crypto = require("crypto")
 
 const createNewUser = async (req, res) => {
   try {
@@ -12,14 +13,20 @@ const createNewUser = async (req, res) => {
 
     const newUser = await User.create(req.body);
     newUser.password = await User.encrypPassword(newUser.password);
+    newUser.emailToken = crypto.randomBytes(64).toString('hex')
 
     if (!newUser) {
       return res
         .status(502)
         .send({ success: false, msg: "User not created", err: newUser });
     }
+    
     await newUser.save();
-    await welcome(newUser.email);
+
+    await welcome(newUser.email, newUser.emailToken, req.headers.host);
+
+    req.flash('success', 'Gracias por registrate. Por favor revisa tu correo electrónico para verificar tu cuenta')
+
     return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {
     return res
