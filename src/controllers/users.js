@@ -12,13 +12,13 @@ const createNewUser = async (req, res) => {
     }
     const newUser = await User.create(req.body);
     newUser.password = await User.encrypPassword(newUser.password);
-    newUser.emailToken = crypto.randomBytes(64).toString('hex')
-
+    
     if (!newUser) {
       return res
-        .status(502)
-        .send({ success: false, msg: "User not created", err: newUser });
+      .status(502)
+      .send({ success: false, msg: "User not created", err: newUser });
     }
+    newUser.emailToken = crypto.randomBytes(64).toString('hex')
     await newUser.save();
     await welcome(newUser.email, newUser.emailToken, req.headers.host);
     return res.status(201).send({ success: true, msg: "User created!" });

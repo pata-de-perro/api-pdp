@@ -8,12 +8,12 @@ const welcome = (mail, emailToken, host) => {
     text: `
     Gracias por registrarte en Pata de Perro.
     Es importante que verifiques tu cuenta. Copia y pega el siguiente enlace en tu navegador para verificar tu cuenta.
-    http://${host}/verify-email?token=${emailToken}
+    http://${host}/api/v1/verify?token=${emailToken}
     `,
     html: `
     <h1>Gracias por registrarte en Pata de Perro</h1>
     <p>Es importante que verifiques tu cuenta. Has click el siguiente enlace en tu navegador para verificar tu cuenta</p>
-    <a href="http://${host}/verify-email?token=${emailToken}">Verifica tu cuenta</a>
+    <a http://${host}/api/v1/verify?token=${emailToken}">Verifica tu cuenta</a>
     `,
   });
 };

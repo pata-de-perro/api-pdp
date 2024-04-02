@@ -2,17 +2,18 @@
 const User = require("../models/users");
 
 const validateEmail = async (req, res, next) => {
+  const tokenProvided = req.query.token
+  const user = await User.findOne({ emailToken: tokenProvided })
   try{
-      const user = await User.findOne({ emailToken: req.query.token })
       if(!user){
-          res.status(400).json({ success: false, msg: "Token no valid" })
+          res.status(404).json({ success: false, msg: "Token no valid" })
           return res.redirect('/')
       }
-      console.log(user.emailToken)
+      // console.log(user.emailToken)
       user.emailToken = null;
       user.isActive = true;
       await user.save();
-      next()
+      return res.redirect('/')
   }   catch(error){
       console.log(error)
   }
