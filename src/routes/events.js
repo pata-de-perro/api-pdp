@@ -6,12 +6,14 @@ const {
   getPlanEventById,
   getEventsByUser,
   updateEventsById,
+  getPlacesEventById,
 } = require("../controllers/events");
 const { auth } = require("../middlewares/auth");
 
 router.post("/", [auth], createNewEvent);
 router.get("/plan/:id", [auth], getPlanEventById);
-router.get("/:id", [auth], getEventsByUser);
+router.get("/place/:id", [auth], getPlacesEventById);
+router.get("/user/:id", [auth], getEventsByUser);
 router.put("/update/:id", [auth], updateEventsById);
 
 module.exports = router;
