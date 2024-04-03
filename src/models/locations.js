@@ -3,9 +3,11 @@ const { Schema, model } = mongoose;
 
 const locationSchema = new Schema(
   {
-    locationName: { type: String, trim: true, required: true },
-    description: { type: String, trim: true },
-    address: { type: String, trim: true, required: true },
+    placeIdGoogle: { type: String, required: true },
+    name: { type: String, trim: true, required: true },
+    type: { type: String, trim: true, required: true },
+    vicinity: { type: String, trim: true },
+    simpleAddress: { type: String, trim: true, required: true },
     coords: { type: [Number], required: true },
   },
   { timestamps: true }
