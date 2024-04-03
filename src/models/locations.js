@@ -7,11 +7,6 @@ const locationSchema = new Schema(
     description: { type: String, trim: true },
     address: { type: String, trim: true, required: true },
     coords: { type: [Number], required: true },
-    categoryId: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Category",
-      required: true,
-    },
   },
   { timestamps: true }
 );

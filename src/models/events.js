@@ -9,16 +9,10 @@ const eventSchema = new Schema(
     endDate: { type: Date, default: Date.now },
     locationEvent: { type: String, trim: true },
     coordsEvent: { type: [Number], required: true },
-    locations: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Location",
-      },
-    ],
+    locations: [{ type: mongoose.Schema.ObjectId, ref: "Location" }],
     userId: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
     isTravel: { type: Boolean, default: false },
     urlImage: { type: String },
-    friends: {type:String, trim: true, required:false, ref:"Friends"}
   },
   { timestamps: true }
 );
