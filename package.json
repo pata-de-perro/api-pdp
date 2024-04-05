@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch . index.js",
-    "start": "node index.js"
+    "start": "PROD=true node index.js"
   },
   "repository": {
     "type": "git",
