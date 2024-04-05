@@ -22,7 +22,7 @@ const getPlanEventById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const event = await Event.findById(id);
+    const event = await Event.findById(id).populate("locations").exec();
     if (!event) {
       return res.status(404).send({ success: false, msg: "Event not found" });
     }
