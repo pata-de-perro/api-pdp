@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
+  PROD:process.env.PROD ?? false,
   API: {
     PORT: process.env.API_PORT,
   },
@@ -23,5 +24,7 @@ module.exports = {
   },
   SENDGRID: {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
-  }
+  },
+  CAPTCHA: process.env.RECAPTCHA_SECRET_KEY,
+
 };

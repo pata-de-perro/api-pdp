@@ -9,13 +9,8 @@ const eventSchema = new Schema(
     endDate: { type: Date, default: Date.now },
     locationEvent: { type: String, trim: true },
     coordsEvent: { type: [Number], required: true },
-    locations: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Location",
-      },
-    ],
-    userId: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
+    locations: [{ type: Schema.ObjectId, ref: "Location" }],
+    userId: { type: Schema.ObjectId, ref: "User", required: true },
     isTravel: { type: Boolean, default: false },
     urlImage: { type: String },
   },

@@ -12,7 +12,14 @@ const authUser = async (req, res) => {
         .status(401)
         .send({ success: false, msg: "Incorrect credentials!" });
     }
-
+    if (!existUser.isActive) {
+      return res
+        .status(401)
+        .send({
+          success: false,
+          msg: "Your user is not valid. Check your email and verify your account",
+        });
+    }
     let validPass = await User.comparePassword(password, existUser.password);
     if (!validPass) {
       return res

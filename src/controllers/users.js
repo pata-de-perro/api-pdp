@@ -1,5 +1,6 @@
 const User = require("../models/users");
 const { welcome } = require("../lib/welcomeMail");
+const crypto = require("crypto");
 
 const createNewUser = async (req, res) => {
   try {
@@ -9,7 +10,6 @@ const createNewUser = async (req, res) => {
         .status(400)
         .send({ success: false, msg: "Email already in use" });
     }
-
     const newUser = await User.create(req.body);
     newUser.password = await User.encrypPassword(newUser.password);
 
@@ -18,8 +18,9 @@ const createNewUser = async (req, res) => {
         .status(502)
         .send({ success: false, msg: "User not created", err: newUser });
     }
+    newUser.emailToken = crypto.randomBytes(64).toString("hex");
     await newUser.save();
-    await welcome(newUser.email);
+    await welcome(newUser.email, newUser.emailToken, req.headers.host);
     return res.status(201).send({ success: true, msg: "User created!" });
   } catch (err) {
     return res
