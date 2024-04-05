@@ -76,7 +76,7 @@ const getUpcomingEventsByUser = async (req, res) => {
     const todayDate = new Date();
     const events = await Event.find({
       userId: id,
-      initialdate: { $gt: todayDate },
+      initialDate: { $gt: todayDate },
     });
     if (!events) {
       return res.status(404).send({ success: false, msg: "Events not found" });
