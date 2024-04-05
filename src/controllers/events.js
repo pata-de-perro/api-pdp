@@ -69,6 +69,26 @@ const getEventsByUser = async (req, res) => {
   }
 };
 
+const getUpcomingEventsByUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const todayDate = new Date();
+    const events = await Event.find({
+      userId: id,
+      initialdate: { $gt: todayDate },
+    });
+    if (!events) {
+      return res.status(404).send({ success: false, msg: "Events not found" });
+    }
+    return res.status(200).send({ success: true, data: events });
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .send({ success: false, msg: err.message || "Unknown" });
+  }
+};
+
 const updateEventsById = async (req, res) => {
   const { id } = req.params;
   const updateEvent = req.body;
@@ -115,6 +135,7 @@ module.exports = {
   getPlanEventById,
   getPlacesEventById,
   getEventsByUser,
+  getUpcomingEventsByUser,
   updateEventsById,
   deleteEventById,
 };
