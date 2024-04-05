@@ -9,14 +9,14 @@ const validateEmail = async (req, res, next) => {
           res
           .status(404)
           .json({ success: false, msg: "Token no valid" })
-          return res.redirect('/')
+          return res.redirect('https://www.pata-de-perro.com')
       }
       user.emailToken = null;
       user.isActive = true;
       await user.save();
       return res
       .status(201)
-      .send({ success: true, msg: "User verified!" });
+      .redirect('https://www.pata-de-perro.com/account/login')
   }   catch(error){
     return res
       .status(err.status || 500)
