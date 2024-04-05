@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
+  PROD:process.env.PROD ?? false,
   API: {
     PORT: process.env.API_PORT,
   },
